@@ -1,0 +1,44 @@
+{
+  "title": "Vehicle Insight — Buying a used car (15s vertical social ad)",
+  "background": "Modern UK suburban driveway, late golden-hour light. A used dark-grey BMW X3 with a For Sale sign in the windscreen. Contemporary, realistic, cinematic colour grade with calm greys and a single brand-green accent (#33B87A).",
+  "characters": [
+    {
+      "id": "buyer",
+      "description": "British woman, early 30s, casual smart jacket, holding her phone, cautious but confident body language"
+    },
+    {
+      "id": "seller",
+      "description": "Middle-aged man, friendly but slightly evasive, stands by the car"
+    }
+  ],
+  "scenes": [
+    {
+      "time": "0-3s",
+      "camera": "Slow push-in, shallow depth of field, eye level on the car",
+      "action": "Buyer circles the car. Seller smiles. On-screen caption: \"That 'clean' car you're about to buy…\"",
+      "audio": "Low tense ambient pad, distant street sounds (volume: low)"
+    },
+    {
+      "time": "3-7s",
+      "camera": "Over-the-shoulder close-up of the buyer's phone screen",
+      "action": "She types the registration YH17 SRU into the Vehicle Insight plate field. A progress bar sweeps: 'Checking DVLA · DVSA · finance registers…'",
+      "audio": "Soft UI ticks, rising synth note (volume: medium)"
+    },
+    {
+      "time": "7-11s",
+      "camera": "Phone screen fills frame, three alert cards slam in one by one with subtle haptic-style shakes",
+      "action": "Cards read: '£4,200 finance owed — ALERT', 'Mileage anomaly — ALERT', 'Cat S write-off — ALERT'. Cut to buyer's eyebrow raise; the seller's smile fades in soft-focus background.",
+      "dialogue": [{ "speaker": "buyer", "line": "Interesting… the report says there's finance still owed on it?" }],
+      "audio": "Three muted alert thuds (volume: medium)"
+    },
+    {
+      "time": "11-15s",
+      "camera": "Clean end card, locked off",
+      "action": "Vehicle Insight logo cascade (red, orange, teal speech-bubble swooshes), headline 'Know before you buy.', green CTA button 'Check any reg free →' with a soft double-bounce, 4.8-star rating, partner wordmarks: The Telegraph, What Car?, Halfords, Select Car Leasing, Asda.",
+      "audio": "Resolving warm chord, gentle whoosh on logo (volume: medium). VO, female, warm and dry: \"Know the full story behind any vehicle. Vehicle Insight.\""
+    }
+  ],
+  "style": "Realistic with crisp motion-graphics overlays, brand fonts Fraunces (serif headlines) and Inter Tight (UI), 1080x1920 vertical, broadcast-clean",
+  "aspect_ratio": "9:16",
+  "duration_seconds": 15
+}

@@ -1,0 +1,44 @@
+{
+  "title": "Vehicle Insight — Selling your car (15s vertical social ad)",
+  "background": "Bright UK home kitchen, morning light; later a clean driveway handover scene. Realistic, optimistic grade, brand-green accent (#33B87A).",
+  "characters": [
+    {
+      "id": "owner",
+      "description": "British man, late 20s, hoodie, selling his hatchback privately, phone in hand"
+    },
+    {
+      "id": "buyer",
+      "description": "Couple in their 40s, sceptical at first, warm once convinced"
+    }
+  ],
+  "scenes": [
+    {
+      "time": "0-3s",
+      "camera": "Handheld close-up on phone notifications",
+      "action": "Marketplace messages pile up: 'Is it cat damaged?', 'Any finance on it??', 'Why so cheap lol'. Caption: 'Buyers don't trust sellers.'",
+      "audio": "Rapid message pings (volume: medium)"
+    },
+    {
+      "time": "3-7s",
+      "camera": "Top-down on phone, smooth UI macro",
+      "action": "Owner runs a Vehicle Insight Full Check on his own reg KT68 WRX. Green ticks cascade: 'No outstanding finance ✓ · Mileage verified ✓ · Never written off ✓'. He taps Share.",
+      "audio": "Satisfying tick sounds over light percussion (volume: medium)"
+    },
+    {
+      "time": "7-11s",
+      "camera": "Driveway, two-shot, natural light",
+      "action": "Buyer couple scroll the report on their phone, visibly relax, nod to each other. Handshake over the keys. A 'SOLD IN 3 DAYS' stamp slams over the frame.",
+      "dialogue": [{ "speaker": "buyer", "line": "Honestly, the report answered everything. We'll take it." }],
+      "audio": "Stamp thud, upbeat resolve (volume: medium)"
+    },
+    {
+      "time": "11-15s",
+      "camera": "Clean end card, locked off",
+      "action": "Vehicle Insight logo, headline 'Sell faster. Back your price.', CTA 'Get your report →' with soft double-bounce, 4.8-star rating, partner wordmarks: The Telegraph, What Car?, Halfords, Select Car Leasing, Asda.",
+      "audio": "Warm closing chord. VO, male, confident: \"Prove it's clean. Sell it faster. Vehicle Insight.\""
+    }
+  ],
+  "style": "Realistic UGC-adjacent energy with polished motion-graphics overlays, Fraunces + Inter Tight type, 1080x1920 vertical",
+  "aspect_ratio": "9:16",
+  "duration_seconds": 15
+}

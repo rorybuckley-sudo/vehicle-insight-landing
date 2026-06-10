@@ -12,6 +12,9 @@ dist
 dist-ssr
 *.local
 
+# Rendered promo videos (regenerate with: node promo/record.cjs)
+promo/out
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>VI Ad — Selling</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500..900&family=Inter+Tight:wght@400..800&display=swap" rel="stylesheet">
+<style>
+  /* 15s timeline · 1080x1920 · S1 hook 0–3s · S2 clean report 3–6.8s · S3 chat 6.8–11s · S4 endcard 11–15s */
+  * { margin:0; padding:0; box-sizing:border-box; }
+  :root{
+    --green:#33B87A; --green-d:#279561; --dark:#3D3D3E; --ink:#18181b; --ink2:#52525b; --ink3:#71717a;
+    --red:#9c1d23; --page:#E6E6E6; --line:#e4e4e7;
+    --disp:'Fraunces',Georgia,serif; --body:'Inter Tight',system-ui,sans-serif;
+    --ease:cubic-bezier(.2,.7,.2,1);
+  }
+  html,body{ width:1080px; height:1920px; overflow:hidden; background:var(--page); font-family:var(--body); }
+  .scene{ position:absolute; inset:0; opacity:0; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:90px; text-align:center; }
+
+  @keyframes win1{ 0%,1.5%{opacity:0} 4%,18.5%{opacity:1} 20%,100%{opacity:0} }
+  @keyframes win2{ 0%,20%{opacity:0} 22.5%,43.8%{opacity:1} 45.3%,100%{opacity:0} }
+  @keyframes win3{ 0%,45.3%{opacity:0} 47.8%,71.8%{opacity:1} 73.3%,100%{opacity:0} }
+  @keyframes win4{ 0%,73.3%{opacity:0} 76%,100%{opacity:1} }
+  .s1{ animation:win1 15s linear both; background:var(--dark); }
+  .s2{ animation:win2 15s linear both; }
+  .s3{ animation:win3 15s linear both; }
+  .s4{ animation:win4 15s linear both; }
+
+  @keyframes rise{ from{opacity:0; transform:translateY(46px)} to{opacity:1; transform:none} }
+  @keyframes pop{ 0%{opacity:0; transform:scale(.82)} 60%{transform:scale(1.05)} 100%{opacity:1; transform:scale(1)} }
+  @keyframes tickIn{ 0%{opacity:0; transform:translateX(-26px)} 100%{opacity:1; transform:none} }
+  @keyframes stamp{ 0%{opacity:0; transform:rotate(-8deg) scale(2.2)} 100%{opacity:1; transform:rotate(-8deg) scale(1)} }
+  @keyframes bounce{ 0%,100%{transform:translateY(0)} 30%{transform:translateY(-16px)} 55%{transform:translateY(0)} 72%{transform:translateY(-7px)} 85%{transform:translateY(0)} }
+
+  /* S1 */
+  .s1 .kicker{ color:rgba(255,255,255,.55); font-weight:700; letter-spacing:.24em; text-transform:uppercase; font-size:30px; animation:rise .6s var(--ease) .3s both; }
+  .s1 h1{ font-family:var(--disp); font-weight:800; color:#fff; font-size:104px; line-height:1.06; letter-spacing:-.02em; margin-top:36px; animation:rise .7s var(--ease) .55s both; }
+  .s1 h1 em{ font-style:normal; color:#1fa98c; }
+  .s1 .sub{ color:rgba(255,255,255,.7); font-size:42px; margin-top:44px; font-weight:600; animation:rise .7s var(--ease) 1.3s both; }
+
+  /* S2 — clean report */
+  .s2 h2{ font-family:var(--disp); font-weight:800; font-size:72px; color:var(--ink); letter-spacing:-.015em; margin-bottom:56px; animation:rise .6s var(--ease) 3.3s both; }
+  .rep{ width:860px; background:#fff; border-radius:28px; padding:56px; box-shadow:0 26px 70px rgba(0,0,0,.16); text-align:left; animation:pop .55s var(--ease) 3.6s both; }
+  .rep .head{ display:flex; align-items:center; gap:26px; border-bottom:2px solid var(--line); padding-bottom:36px; }
+  .rep .plate{ display:inline-flex; height:84px; border-radius:12px; overflow:hidden; border:2px solid #d9b400; }
+  .rep .plate .uk{ background:#00309a; color:#fff; display:flex; align-items:center; justify-content:center; width:56px; font-family:var(--disp); font-weight:800; font-size:24px; }
+  .rep .plate .num{ background:#f8d307; color:#1a1a1a; display:flex; align-items:center; padding:0 30px; font-family:var(--disp); font-weight:900; font-size:44px; letter-spacing:.08em; }
+  .rep .head h3{ font-family:var(--disp); font-weight:900; font-size:38px; color:var(--ink); }
+  .rep ul{ list-style:none; margin-top:18px; }
+  .rep li{ display:flex; align-items:center; gap:24px; padding:26px 0; border-bottom:2px solid #f4f4f5; font-size:36px; font-weight:700; color:var(--ink); }
+  .rep li:last-child{ border-bottom:0; }
+  .rep li .tk{ width:54px; height:54px; border-radius:99px; background:rgba(51,184,122,.14); color:var(--green-d); display:flex; align-items:center; justify-content:center; font-size:30px; flex-shrink:0; }
+  .rep li.t1{ animation:tickIn .45s var(--ease) 4.1s both; }
+  .rep li.t2{ animation:tickIn .45s var(--ease) 4.5s both; }
+  .rep li.t3{ animation:tickIn .45s var(--ease) 4.9s both; }
+  .rep li.t4{ animation:tickIn .45s var(--ease) 5.3s both; }
+
+  /* S3 — chat */
+  .s3 h2{ font-family:var(--disp); font-weight:800; font-size:68px; color:var(--ink); letter-spacing:-.015em; margin-bottom:64px; animation:rise .5s var(--ease) 7.1s both; }
+  .chat{ width:840px; display:flex; flex-direction:column; gap:30px; }
+  .bub{ max-width:78%; padding:34px 42px; border-radius:30px; font-size:36px; font-weight:600; line-height:1.35; text-align:left; }
+  .them{ align-self:flex-start; background:#fff; color:var(--ink); border-bottom-left-radius:8px; box-shadow:0 10px 30px rgba(0,0,0,.10); }
+  .me{ align-self:flex-end; background:var(--green); color:#fff; border-bottom-right-radius:8px; }
+  .b1{ animation:rise .45s var(--ease) 7.5s both; }
+  .b2{ animation:rise .45s var(--ease) 8.2s both; }
+  .b3{ animation:rise .45s var(--ease) 9.1s both; }
+  .b2 .mini{ display:flex; align-items:center; gap:18px; background:rgba(255,255,255,.16); border-radius:16px; padding:20px 24px; margin-top:18px; font-size:28px; font-weight:700; }
+  .stampWrap{ position:relative; margin-top:80px; }
+  .stampEl{ display:inline-block; border:8px solid var(--green-d); color:var(--green-d); font-family:var(--disp); font-weight:900; font-size:74px; letter-spacing:.08em; padding:20px 52px; border-radius:18px; transform:rotate(-8deg); animation:stamp .35s var(--ease) 9.9s both; background:rgba(255,255,255,.7); }
+
+  /* S4 — end card */
+  .logo{ display:flex; align-items:center; gap:26px; animation:pop .6s var(--ease) 11.6s both; }
+  .s4 h2{ font-family:var(--disp); font-weight:800; font-size:92px; color:var(--ink); letter-spacing:-.02em; line-height:1.05; margin-top:60px; animation:rise .7s var(--ease) 12s both; }
+  .s4 h2 em{ font-style:normal; color:var(--red); }
+  .s4 .free{ color:var(--ink2); font-size:42px; font-weight:600; margin-top:40px; animation:rise .7s var(--ease) 12.4s both; }
+  .cta{ margin-top:64px; background:var(--green); color:#fff; font-weight:800; font-size:46px; padding:42px 84px; border-radius:20px; box-shadow:0 18px 44px rgba(51,184,122,.4); animation:rise .6s var(--ease) 12.7s both, bounce 1s var(--ease) 13.6s 1; }
+  .s4 .legal{ color:var(--ink3); font-size:28px; margin-top:36px; animation:rise .6s var(--ease) 13s both; }
+  .s4 .stars{ color:#00b67a; font-size:34px; letter-spacing:.1em; margin-top:34px; font-weight:700; animation:rise .6s var(--ease) 13.2s both; }
+  .s4 .partners{ position:absolute; bottom:100px; left:0; right:0; animation:rise .8s var(--ease) 13.4s both; }
+  .s4 .partners .lbl{ font-size:22px; letter-spacing:.2em; color:#a1a1aa; font-weight:700; text-transform:uppercase; }
+  .s4 .partners .row{ display:flex; flex-wrap:wrap; gap:18px 34px; justify-content:center; align-items:baseline; margin-top:22px; padding:0 60px; color:#a1a1aa; }
+</style>
+</head>
+<body>
+
+<section class="scene s1">
+  <div class="kicker">Selling your car?</div>
+  <h1>Buyers don’t<br>trust sellers.<br><em>Give them proof.</em></h1>
+  <div class="sub">An independent report ends the haggling.</div>
+</section>
+
+<section class="scene s2">
+  <h2>Your car. Verified clean.</h2>
+  <div class="rep">
+    <div class="head">
+      <span class="plate"><span class="uk">UK</span><span class="num">KT68 WRX</span></span>
+      <h3>Full Vehicle Report</h3>
+    </div>
+    <ul>
+      <li class="t1"><span class="tk">✓</span> No outstanding finance</li>
+      <li class="t2"><span class="tk">✓</span> Mileage verified — no anomalies</li>
+      <li class="t3"><span class="tk">✓</span> Never written off</li>
+      <li class="t4"><span class="tk">✓</span> Full MOT history attached</li>
+    </ul>
+  </div>
+</section>
+
+<section class="scene s3">
+  <h2>Watch what happens.</h2>
+  <div class="chat">
+    <div class="bub them b1">Looks good — any issues I should know about? 🤔</div>
+    <div class="bub me b2">Nothing to hide — here’s the independent full check 👇
+      <div class="mini">📄 Vehicle Insight report · KT68 WRX · all clear</div>
+    </div>
+    <div class="bub them b3">Wow, OK. When can I come and view it?</div>
+  </div>
+  <div class="stampWrap"><span class="stampEl">SOLD IN 3 DAYS</span></div>
+</section>
+
+<section class="scene s4">
+  <div class="logo">
+    <svg viewBox="0 0 200 220" style="height:170px">
+      <defs>
+        <linearGradient id="r" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#9c1d23"/><stop offset="100%" stop-color="#c82430"/></linearGradient>
+        <linearGradient id="o" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#f26522"/><stop offset="100%" stop-color="#f7941e"/></linearGradient>
+        <linearGradient id="t" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#1f7a5e"/><stop offset="100%" stop-color="#1fa98c"/></linearGradient>
+      </defs>
+      <path fill="url(#r)" d="M170,38h-95a30,30 0 0 0 -30,30v76a30,30 0 0 0 30,30h95l20,32V68a30,30 0 0 0 -30,-30z"/>
+      <path fill="url(#o)" d="M150,18h-95a30,30 0 0 0 -30,30v76a30,30 0 0 0 30,30h95l20,32V48a30,30 0 0 0 -30,-30z"/>
+      <path fill="url(#t)" d="M130,38h-95a30,30 0 0 0 -30,30v76a30,30 0 0 0 30,30h95l20,32V68a30,30 0 0 0 -30,-30z"/>
+      <path fill="#fff" d="M55,80 L80,80 L92,128 L104,80 L129,80 L108,150 L76,150 Z"/>
+      <rect fill="#fff" x="138" y="80" width="20" height="70" rx="3"/>
+    </svg>
+    <div style="font-family:var(--disp);font-weight:800;font-size:64px;color:var(--dark);text-align:left;line-height:1.04">VEHICLE<br>INSIGHT</div>
+  </div>
+  <h2>Sell faster.<br><em>Back your price.</em></h2>
+  <div class="free">Run a full check on your own car from £19.99</div>
+  <div class="cta">Get your report →</div>
+  <div class="legal">Share it with every buyer · PDF included</div>
+  <div class="stars">★★★★★&nbsp; Excellent 4.8</div>
+  <div class="partners">
+    <div class="lbl">As seen on &amp; recommended by</div>
+    <div class="row">
+      <span style="font-family:var(--disp);font-weight:600;font-size:34px">The Telegraph</span>
+      <span style="font-weight:900;font-style:italic;font-size:33px">What Car?</span>
+      <span style="font-weight:900;font-size:34px">halfords</span>
+      <span style="font-weight:800;font-size:26px;letter-spacing:.02em">SELECT CAR LEASING</span>
+      <span style="font-weight:900;font-size:33px;letter-spacing:.1em">ASDA</span>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>

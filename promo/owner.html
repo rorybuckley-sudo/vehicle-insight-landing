@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>VI Ad — Own It</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500..900&family=Inter+Tight:wght@400..800&display=swap" rel="stylesheet">
+<style>
+  /* 15s timeline · 1080x1920 · S1 hook 0–3s · S2 dashboard 3–7.6s · S3 value 7.6–10.8s · S4 endcard 10.8–15s */
+  * { margin:0; padding:0; box-sizing:border-box; }
+  :root{
+    --green:#33B87A; --green-d:#279561; --dark:#3D3D3E; --ink:#18181b; --ink2:#52525b; --ink3:#71717a;
+    --red:#9c1d23; --warnc:#c2410c; --page:#E6E6E6; --line:#e4e4e7;
+    --disp:'Fraunces',Georgia,serif; --body:'Inter Tight',system-ui,sans-serif;
+    --ease:cubic-bezier(.2,.7,.2,1);
+  }
+  html,body{ width:1080px; height:1920px; overflow:hidden; background:var(--dark); font-family:var(--body); }
+  .scene{ position:absolute; inset:0; opacity:0; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:90px; text-align:center; }
+
+  @keyframes win1{ 0%,1.5%{opacity:0} 4%,18.5%{opacity:1} 20%,100%{opacity:0} }
+  @keyframes win2{ 0%,20%{opacity:0} 22.5%,49.2%{opacity:1} 50.7%,100%{opacity:0} }
+  @keyframes win3{ 0%,50.7%{opacity:0} 53.2%,70.5%{opacity:1} 72%,100%{opacity:0} }
+  @keyframes win4{ 0%,72%{opacity:0} 74.5%,100%{opacity:1} }
+  .s1{ animation:win1 15s linear both; }
+  .s2{ animation:win2 15s linear both; background:var(--page); }
+  .s3{ animation:win3 15s linear both; background:var(--page); }
+  .s4{ animation:win4 15s linear both; background:var(--page); }
+
+  @keyframes rise{ from{opacity:0; transform:translateY(46px)} to{opacity:1; transform:none} }
+  @keyframes pop{ 0%{opacity:0; transform:scale(.82)} 60%{transform:scale(1.05)} 100%{opacity:1; transform:scale(1)} }
+  @keyframes flipIn{ 0%{opacity:0; transform:perspective(900px) rotateX(-55deg)} 100%{opacity:1; transform:none} }
+  @keyframes countUp{ from{opacity:0; transform:translateY(20px) scale(.94)} to{opacity:1; transform:none} }
+  @keyframes bounce{ 0%,100%{transform:translateY(0)} 30%{transform:translateY(-16px)} 55%{transform:translateY(0)} 72%{transform:translateY(-7px)} 85%{transform:translateY(0)} }
+
+  /* S1 */
+  .s1 .kicker{ color:rgba(255,255,255,.55); font-weight:700; letter-spacing:.24em; text-transform:uppercase; font-size:30px; animation:rise .6s var(--ease) .3s both; }
+  .s1 h1{ font-family:var(--disp); font-weight:800; color:#fff; font-size:108px; line-height:1.06; letter-spacing:-.02em; margin-top:36px; animation:rise .7s var(--ease) .55s both; }
+  .s1 .sub{ color:rgba(255,255,255,.7); font-size:44px; margin-top:44px; font-weight:600; animation:rise .7s var(--ease) 1.5s both; }
+  .s1 .sub em{ font-style:normal; color:#f7941e; font-weight:800; }
+
+  /* S2 — owner dashboard */
+  .s2 h2{ font-family:var(--disp); font-weight:800; font-size:70px; color:var(--ink); letter-spacing:-.015em; margin-bottom:24px; animation:rise .6s var(--ease) 3.3s both; }
+  .s2 .plate{ display:inline-flex; height:90px; border-radius:14px; overflow:hidden; border:2px solid #d9b400; margin-bottom:48px; animation:pop .5s var(--ease) 3.5s both; }
+  .s2 .plate .uk{ background:#00309a; color:#fff; display:flex; align-items:center; justify-content:center; width:60px; font-family:var(--disp); font-weight:800; font-size:26px; }
+  .s2 .plate .num{ background:#f8d307; color:#1a1a1a; display:flex; align-items:center; padding:0 34px; font-family:var(--disp); font-weight:900; font-size:48px; letter-spacing:.08em; }
+  .grid{ display:grid; grid-template-columns:1fr 1fr; gap:30px; width:880px; }
+  .tile{ background:#fff; border-radius:26px; padding:48px 42px; text-align:left; box-shadow:0 18px 48px rgba(0,0,0,.12); }
+  .tile .eb{ font-family:var(--disp); font-weight:900; font-size:24px; letter-spacing:.14em; text-transform:uppercase; color:var(--ink3); }
+  .tile .v{ font-family:var(--disp); font-weight:900; font-size:54px; margin-top:14px; color:var(--ink); letter-spacing:-.01em; }
+  .tile .sub{ font-size:28px; color:var(--ink3); margin-top:10px; }
+  .tile.good .v{ color:#16a34a; }
+  .tile.warn .v{ color:var(--warnc); }
+  .g1{ animation:flipIn .5s var(--ease) 4s both; }
+  .g2{ animation:flipIn .5s var(--ease) 4.45s both; }
+  .g3{ animation:flipIn .5s var(--ease) 4.9s both; }
+  .g4{ animation:flipIn .5s var(--ease) 5.35s both; }
+  .s2 .foot{ font-size:36px; font-weight:700; color:var(--ink2); margin-top:56px; animation:rise .6s var(--ease) 5.9s both; }
+  .s2 .foot b{ color:var(--warnc); }
+
+  /* S3 — value */
+  .s3 h2{ font-family:var(--disp); font-weight:800; font-size:84px; color:var(--ink); letter-spacing:-.02em; line-height:1.08; animation:rise .6s var(--ease) 8s both; }
+  .s3 h2 em{ font-style:normal; color:var(--red); }
+  .val{ font-family:var(--disp); font-weight:900; font-size:150px; color:var(--ink); margin-top:60px; letter-spacing:-.02em; animation:countUp .7s var(--ease) 8.6s both; }
+  .val small{ display:block; font-family:var(--body); font-weight:700; font-size:36px; color:var(--ink3); letter-spacing:0; margin-top:18px; }
+  .trend{ display:inline-flex; align-items:center; gap:14px; background:rgba(51,184,122,.14); color:var(--green-d); font-weight:800; font-size:34px; border-radius:99px; padding:18px 40px; margin-top:44px; animation:rise .6s var(--ease) 9.2s both; }
+
+  /* S4 — end card */
+  .logo{ display:flex; align-items:center; gap:26px; animation:pop .6s var(--ease) 11.3s both; }
+  .s4 h2{ font-family:var(--disp); font-weight:800; font-size:96px; color:var(--ink); letter-spacing:-.02em; line-height:1.05; margin-top:60px; animation:rise .7s var(--ease) 11.7s both; }
+  .s4 h2 em{ font-style:normal; color:var(--red); }
+  .s4 .free{ color:var(--ink2); font-size:42px; font-weight:600; margin-top:40px; animation:rise .7s var(--ease) 12.1s both; }
+  .cta{ margin-top:64px; background:var(--green); color:#fff; font-weight:800; font-size:46px; padding:42px 84px; border-radius:20px; box-shadow:0 18px 44px rgba(51,184,122,.4); animation:rise .6s var(--ease) 12.4s both, bounce 1s var(--ease) 13.3s 1; }
+  .s4 .legal{ color:var(--ink3); font-size:28px; margin-top:36px; animation:rise .6s var(--ease) 12.7s both; }
+  .s4 .stars{ color:#00b67a; font-size:34px; letter-spacing:.1em; margin-top:34px; font-weight:700; animation:rise .6s var(--ease) 12.9s both; }
+  .s4 .partners{ position:absolute; bottom:100px; left:0; right:0; animation:rise .8s var(--ease) 13.1s both; }
+  .s4 .partners .lbl{ font-size:22px; letter-spacing:.2em; color:#a1a1aa; font-weight:700; text-transform:uppercase; }
+  .s4 .partners .row{ display:flex; flex-wrap:wrap; gap:18px 34px; justify-content:center; align-items:baseline; margin-top:22px; padding:0 60px; color:#a1a1aa; }
+</style>
+</head>
+<body>
+
+<section class="scene s1">
+  <div class="kicker">Already own a car?</div>
+  <h1>Quick — when’s<br>your MOT due?</h1>
+  <div class="sub"><em>…exactly.</em></div>
+</section>
+
+<section class="scene s2">
+  <h2>Your car, fully briefed.</h2>
+  <span class="plate"><span class="uk">UK</span><span class="num">LM21 KVD</span></span>
+  <div class="grid">
+    <div class="tile good g1"><div class="eb">MOT</div><div class="v">Valid ✓</div><div class="sub">Expires 10 Jul 2026</div></div>
+    <div class="tile g2"><div class="eb">Tax</div><div class="v">Due 1 Sep</div><div class="sub">We’ll remind you first</div></div>
+    <div class="tile warn g3"><div class="eb">Recalls</div><div class="v">1 open ⚠</div><div class="sub">Free fix at your dealer</div></div>
+    <div class="tile good g4"><div class="eb">Health</div><div class="v">82 / 100</div><div class="sub">Reliability score</div></div>
+  </div>
+  <div class="foot">That recall? <b>You’d never have known.</b></div>
+</section>
+
+<section class="scene s3">
+  <h2>And what it’s<br><em>actually worth:</em></h2>
+  <div class="val">£11,555<small>private sale estimate · updated monthly</small></div>
+  <div class="trend">▲ Up £340 this month</div>
+</section>
+
+<section class="scene s4">
+  <div class="logo">
+    <svg viewBox="0 0 200 220" style="height:170px">
+      <defs>
+        <linearGradient id="r" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#9c1d23"/><stop offset="100%" stop-color="#c82430"/></linearGradient>
+        <linearGradient id="o" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#f26522"/><stop offset="100%" stop-color="#f7941e"/></linearGradient>
+        <linearGradient id="t" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#1f7a5e"/><stop offset="100%" stop-color="#1fa98c"/></linearGradient>
+      </defs>
+      <path fill="url(#r)" d="M170,38h-95a30,30 0 0 0 -30,30v76a30,30 0 0 0 30,30h95l20,32V68a30,30 0 0 0 -30,-30z"/>
+      <path fill="url(#o)" d="M150,18h-95a30,30 0 0 0 -30,30v76a30,30 0 0 0 30,30h95l20,32V48a30,30 0 0 0 -30,-30z"/>
+      <path fill="url(#t)" d="M130,38h-95a30,30 0 0 0 -30,30v76a30,30 0 0 0 30,30h95l20,32V68a30,30 0 0 0 -30,-30z"/>
+      <path fill="#fff" d="M55,80 L80,80 L92,128 L104,80 L129,80 L108,150 L76,150 Z"/>
+      <rect fill="#fff" x="138" y="80" width="20" height="70" rx="3"/>
+    </svg>
+    <div style="font-family:var(--disp);font-weight:800;font-size:64px;color:var(--dark);text-align:left;line-height:1.04">VEHICLE<br>INSIGHT</div>
+  </div>
+  <h2>Your car.<br><em>Fully briefed.</em></h2>
+  <div class="free">MOT, tax, recalls &amp; live value — free basic check</div>
+  <div class="cta">Check your car free →</div>
+  <div class="legal">No card needed · Official DVLA + DVSA data</div>
+  <div class="stars">★★★★★&nbsp; Excellent 4.8</div>
+  <div class="partners">
+    <div class="lbl">As seen on &amp; recommended by</div>
+    <div class="row">
+      <span style="font-family:var(--disp);font-weight:600;font-size:34px">The Telegraph</span>
+      <span style="font-weight:900;font-style:italic;font-size:33px">What Car?</span>
+      <span style="font-weight:900;font-size:34px">halfords</span>
+      <span style="font-weight:800;font-size:26px;letter-spacing:.02em">SELECT CAR LEASING</span>
+      <span style="font-weight:900;font-size:33px;letter-spacing:.1em">ASDA</span>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>

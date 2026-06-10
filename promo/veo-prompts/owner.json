@@ -1,0 +1,44 @@
+{
+  "title": "Vehicle Insight — Checking your own car (15s vertical social ad)",
+  "background": "Cosy UK living room, evening; car visible through the window on the drive. Warm domestic grade with brand-green UI accents (#33B87A).",
+  "characters": [
+    {
+      "id": "owner",
+      "description": "British woman, 40s, on the sofa with a cup of tea, relaxed, phone in hand"
+    },
+    {
+      "id": "partner",
+      "description": "Her partner, off-screen voice from the kitchen"
+    }
+  ],
+  "scenes": [
+    {
+      "time": "0-3s",
+      "camera": "Static cosy wide, then quick whip to her face",
+      "action": "Caption: 'Quick — when's your MOT due?' She freezes mid-sip. Caption beat: '…exactly.'",
+      "dialogue": [{ "speaker": "partner", "line": "Wasn't the MOT due this month?" }],
+      "audio": "Record-scratch beat of silence, soft comedy sting (volume: low)"
+    },
+    {
+      "time": "3-8s",
+      "camera": "Phone macro, smooth UI glide across a dashboard",
+      "action": "Vehicle Insight owner dashboard for reg LM21 KVD flips in tile by tile: 'MOT: Valid ✓ expires 10 Jul', 'Tax: due 1 Sep — we'll remind you', 'Recalls: 1 open ⚠ free fix at your dealer', 'Reliability: 82/100'.",
+      "audio": "Gentle flip whooshes, calm lo-fi beat (volume: medium)"
+    },
+    {
+      "time": "8-11s",
+      "camera": "Slow push on phone, valuation number counts up",
+      "action": "Valuation reveals: £11,555 private sale estimate, with a green '▲ up £340 this month' pill. She smiles, relieved.",
+      "audio": "Counter tick-up, soft sparkle (volume: medium)"
+    },
+    {
+      "time": "11-15s",
+      "camera": "Clean end card, locked off",
+      "action": "Vehicle Insight logo, headline 'Your car. Fully briefed.', CTA 'Check your car free →' with soft double-bounce, 'No card needed · Official DVLA + DVSA data', 4.8-star rating, partner wordmarks: The Telegraph, What Car?, Halfords, Select Car Leasing, Asda.",
+      "audio": "Warm resolving chord. VO, female, reassuring: \"MOT, tax, recalls and what it's worth — all in one place. Vehicle Insight.\""
+    }
+  ],
+  "style": "Warm realistic domestic scenes with crisp UI motion-graphics, Fraunces + Inter Tight type, 1080x1920 vertical",
+  "aspect_ratio": "9:16",
+  "duration_seconds": 15
+}

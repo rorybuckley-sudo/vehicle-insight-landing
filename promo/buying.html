@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>VI Ad — Buying</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500..900&family=Inter+Tight:wght@400..800&display=swap" rel="stylesheet">
+<style>
+  /* 15s timeline · 1080x1920 · Scene windows:
+     S1 hook 0–2.8s · S2 scan 2.8–6.4s · S3 alerts 6.4–10.6s · S4 endcard 10.6–15s */
+  * { margin:0; padding:0; box-sizing:border-box; }
+  :root{
+    --green:#33B87A; --green-d:#279561; --dark:#3D3D3E; --ink:#18181b; --ink2:#52525b; --ink3:#71717a;
+    --red:#9c1d23; --danger:#D90E14; --warn:#FF4608; --page:#E6E6E6; --line:#e4e4e7;
+    --disp:'Fraunces',Georgia,serif; --body:'Inter Tight',system-ui,sans-serif;
+    --ease:cubic-bezier(.2,.7,.2,1);
+  }
+  html,body{ width:1080px; height:1920px; overflow:hidden; background:var(--dark); font-family:var(--body); }
+  .scene{ position:absolute; inset:0; opacity:0; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:90px; text-align:center; }
+
+  @keyframes win1{ 0%,1.5%{opacity:0} 4%,17%{opacity:1} 18.7%,100%{opacity:0} }
+  @keyframes win2{ 0%,18.7%{opacity:0} 21%,41%{opacity:1} 42.7%,100%{opacity:0} }
+  @keyframes win3{ 0%,42.7%{opacity:0} 45%,69%{opacity:1} 70.7%,100%{opacity:0} }
+  @keyframes win4{ 0%,70.7%{opacity:0} 73.5%,100%{opacity:1} }
+  .s1{ animation:win1 15s linear both; }
+  .s2{ animation:win2 15s linear both; }
+  .s3{ animation:win3 15s linear both; }
+  .s4{ animation:win4 15s linear both; background:var(--page); }
+
+  @keyframes rise{ from{opacity:0; transform:translateY(46px)} to{opacity:1; transform:none} }
+  @keyframes pop{ 0%{opacity:0; transform:scale(.82)} 60%{transform:scale(1.05)} 100%{opacity:1; transform:scale(1)} }
+  @keyframes slam{ 0%{opacity:0; transform:translateY(-30px) scale(1.12)} 100%{opacity:1; transform:none} }
+  @keyframes grow{ from{width:0%} to{width:100%} }
+  @keyframes blink{ 50%{opacity:0} }
+  @keyframes bounce{ 0%,100%{transform:translateY(0)} 30%{transform:translateY(-16px)} 55%{transform:translateY(0)} 72%{transform:translateY(-7px)} 85%{transform:translateY(0)} }
+
+  /* S1 — hook */
+  .s1 .kicker{ color:rgba(255,255,255,.55); font-weight:700; letter-spacing:.24em; text-transform:uppercase; font-size:30px; animation:rise .6s var(--ease) .3s both; }
+  .s1 h1{ font-family:var(--disp); font-weight:800; color:#fff; font-size:104px; line-height:1.06; letter-spacing:-.02em; margin-top:36px; animation:rise .7s var(--ease) .55s both; }
+  .s1 h1 em{ font-style:normal; color:#f7941e; }
+  .s1 .sub{ color:rgba(255,255,255,.7); font-size:42px; margin-top:44px; font-weight:600; animation:rise .7s var(--ease) 1.15s both; }
+
+  /* S2 — scan */
+  .s2 .plate{ display:inline-flex; height:150px; border-radius:18px; overflow:hidden; border:3px solid #d9b400; animation:pop .55s var(--ease) 3s both; }
+  .s2 .plate .uk{ background:#00309a; color:#fff; display:flex; align-items:center; justify-content:center; width:104px; font-family:var(--disp); font-weight:800; font-size:40px; }
+  .s2 .plate .num{ background:#f8d307; color:#1a1a1a; display:flex; align-items:center; padding:0 52px; font-family:var(--disp); font-weight:900; font-size:84px; letter-spacing:.1em; min-width:560px; }
+  .s2 .plate .caret{ display:inline-block; width:6px; height:84px; background:#1a1a1a; margin-left:8px; animation:blink .8s step-end infinite; }
+  .s2 h2{ font-family:var(--disp); font-weight:800; color:#fff; font-size:66px; margin-top:80px; letter-spacing:-.015em; animation:rise .6s var(--ease) 3.4s both; }
+  .s2 .bar{ width:620px; height:14px; border-radius:99px; background:rgba(255,255,255,.18); margin-top:48px; overflow:hidden; animation:rise .6s var(--ease) 3.6s both; }
+  .s2 .bar i{ display:block; height:100%; border-radius:99px; background:var(--green); animation:grow 2.4s var(--ease) 3.8s both; }
+  .s2 .src{ color:rgba(255,255,255,.55); font-size:34px; font-weight:600; margin-top:36px; animation:rise .6s var(--ease) 3.8s both; }
+
+  /* S3 — alerts */
+  .s3 h2{ font-family:var(--disp); font-weight:800; color:#fff; font-size:76px; letter-spacing:-.015em; margin-bottom:64px; animation:slam .5s var(--ease) 6.8s both; }
+  .card{ width:820px; background:#fff; border-radius:24px; padding:44px 48px; display:flex; align-items:center; gap:32px; text-align:left; margin-top:28px; box-shadow:0 24px 60px rgba(0,0,0,.35); }
+  .card .ic{ width:88px; height:88px; border-radius:20px; display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:44px; }
+  .card.bad .ic{ background:#fef2f2; }
+  .card h3{ font-family:var(--disp); font-weight:900; font-size:42px; color:var(--ink); }
+  .card p{ font-size:30px; color:var(--ink2); margin-top:6px; }
+  .card .tag{ margin-left:auto; background:#fef2f2; color:var(--danger); font-weight:800; font-size:26px; padding:12px 24px; border-radius:99px; letter-spacing:.06em; flex-shrink:0; }
+  .c1{ animation:slam .5s var(--ease) 7.3s both; }
+  .c2{ animation:slam .5s var(--ease) 7.9s both; }
+  .c3{ animation:slam .5s var(--ease) 8.5s both; }
+  .s3 .foot{ color:rgba(255,255,255,.65); font-size:36px; font-weight:600; margin-top:72px; animation:rise .6s var(--ease) 9.2s both; }
+  .s3 .foot b{ color:#fff; }
+
+  /* S4 — end card */
+  .logo{ display:flex; align-items:center; gap:26px; animation:pop .6s var(--ease) 11.2s both; }
+  .s4 h2{ font-family:var(--disp); font-weight:800; font-size:96px; color:var(--ink); letter-spacing:-.02em; line-height:1.05; margin-top:60px; animation:rise .7s var(--ease) 11.6s both; }
+  .s4 h2 em{ font-style:normal; color:var(--red); }
+  .s4 .free{ color:var(--ink2); font-size:42px; font-weight:600; margin-top:40px; animation:rise .7s var(--ease) 12s both; }
+  .cta{ margin-top:64px; background:var(--green); color:#fff; font-weight:800; font-size:46px; padding:42px 84px; border-radius:20px; box-shadow:0 18px 44px rgba(51,184,122,.4); animation:rise .6s var(--ease) 12.3s both, bounce 1s var(--ease) 13.2s 1; }
+  .s4 .legal{ color:var(--ink3); font-size:28px; margin-top:36px; animation:rise .6s var(--ease) 12.6s both; }
+  .s4 .partners{ position:absolute; bottom:100px; left:0; right:0; animation:rise .8s var(--ease) 13s both; }
+  .s4 .partners .lbl{ font-size:22px; letter-spacing:.2em; color:#a1a1aa; font-weight:700; text-transform:uppercase; }
+  .s4 .partners .row{ display:flex; flex-wrap:wrap; gap:18px 34px; justify-content:center; align-items:baseline; margin-top:22px; padding:0 60px; color:#a1a1aa; }
+  .s4 .stars{ color:#00b67a; font-size:34px; letter-spacing:.1em; margin-top:34px; font-weight:700; animation:rise .6s var(--ease) 12.8s both; }
+</style>
+</head>
+<body>
+
+<section class="scene s1">
+  <div class="kicker">Buying a used car?</div>
+  <h1>That “clean” car<br>you’re about to buy…<br><em>isn’t always clean.</em></h1>
+  <div class="sub">1 in 3 used cars hides a history issue.</div>
+</section>
+
+<section class="scene s2">
+  <div class="plate"><span class="uk">UK</span><span class="num"><span id="reg"></span><span class="caret"></span></span></div>
+  <h2>Enter any reg.</h2>
+  <div class="bar"><i></i></div>
+  <div class="src">Checking DVLA · DVSA · finance &amp; insurance registers…</div>
+</section>
+
+<section class="scene s3">
+  <h2>30 seconds later:</h2>
+  <div class="card bad c1"><div class="ic">💷</div><div><h3>£4,200 finance owed</h3><p>The lender can repossess it — from you.</p></div><div class="tag">ALERT</div></div>
+  <div class="card bad c2"><div class="ic">🛣️</div><div><h3>Mileage anomaly</h3><p>43,000 miles… that went backwards in 2023.</p></div><div class="tag">ALERT</div></div>
+  <div class="card bad c3"><div class="ic">🔧</div><div><h3>Cat S write-off</h3><p>Structurally damaged. Repaired. Undisclosed.</p></div><div class="tag">ALERT</div></div>
+  <div class="foot">The seller wasn’t going to mention <b>any of this.</b></div>
+</section>
+
+<section class="scene s4">
+  <div class="logo">
+    <svg viewBox="0 0 200 220" style="height:170px">
+      <defs>
+        <linearGradient id="r" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#9c1d23"/><stop offset="100%" stop-color="#c82430"/></linearGradient>
+        <linearGradient id="o" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#f26522"/><stop offset="100%" stop-color="#f7941e"/></linearGradient>
+        <linearGradient id="t" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#1f7a5e"/><stop offset="100%" stop-color="#1fa98c"/></linearGradient>
+      </defs>
+      <path fill="url(#r)" d="M170,38h-95a30,30 0 0 0 -30,30v76a30,30 0 0 0 30,30h95l20,32V68a30,30 0 0 0 -30,-30z"/>
+      <path fill="url(#o)" d="M150,18h-95a30,30 0 0 0 -30,30v76a30,30 0 0 0 30,30h95l20,32V48a30,30 0 0 0 -30,-30z"/>
+      <path fill="url(#t)" d="M130,38h-95a30,30 0 0 0 -30,30v76a30,30 0 0 0 30,30h95l20,32V68a30,30 0 0 0 -30,-30z"/>
+      <path fill="#fff" d="M55,80 L80,80 L92,128 L104,80 L129,80 L108,150 L76,150 Z"/>
+      <rect fill="#fff" x="138" y="80" width="20" height="70" rx="3"/>
+    </svg>
+    <div style="font-family:var(--disp);font-weight:800;font-size:64px;color:var(--dark);text-align:left;line-height:1.04">VEHICLE<br>INSIGHT</div>
+  </div>
+  <h2>Know before<br><em>you buy.</em></h2>
+  <div class="free">Free basic check · full report in 30 seconds</div>
+  <div class="cta">Check any reg free →</div>
+  <div class="legal">No card needed · Official DVLA + DVSA data</div>
+  <div class="stars">★★★★★&nbsp; Excellent 4.8</div>
+  <div class="partners">
+    <div class="lbl">As seen on &amp; recommended by</div>
+    <div class="row">
+      <span style="font-family:var(--disp);font-weight:600;font-size:34px">The Telegraph</span>
+      <span style="font-weight:900;font-style:italic;font-size:33px">What Car?</span>
+      <span style="font-weight:900;font-size:34px">halfords</span>
+      <span style="font-weight:800;font-size:26px;letter-spacing:.02em">SELECT CAR LEASING</span>
+      <span style="font-weight:900;font-size:33px;letter-spacing:.1em">ASDA</span>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Plate types in during scene 2 (starts ~3.2s). Restartable so the
+  // recorder can re-zero it together with the CSS animations.
+  const REG = 'YH17 SRU';
+  const el = document.getElementById('reg');
+  let timers = [];
+  window.__restartTyping = () => {
+    timers.forEach(clearTimeout);
+    el.textContent = '';
+    timers = REG.split('').map((ch, i) => setTimeout(() => { el.textContent += ch; }, 3300 + i * 130));
+  };
+  window.__restartTyping();
+</script>
+</body>
+</html>
