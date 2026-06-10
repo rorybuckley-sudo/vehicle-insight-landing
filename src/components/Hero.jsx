@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { HERO, CHECK_REASONS } from '../data.jsx'
 import { IconArrowRight, IconLock, IconClock, IconShield } from './Icons.jsx'
 import { Button, Nudge, PlateField } from './ui.jsx'
+import { RatingStrip, PROOF } from './SocialProof.jsx'
 
 /* Entrance stagger: each hero child rises in sequence on load. */
 const rise = (delay) => ({ className: 'animate-rise', style: { animationDelay: `${delay}ms` } })
@@ -97,6 +98,13 @@ export function Hero({ plate, setPlate, reason, setReason, onSubmit, onSample })
                 <IconArrowRight size={16} stroke={2.4} />
               </Nudge>
             </Button>
+            <p className="m-0 mt-2.5 flex items-center justify-center gap-1.5 text-center text-[12px] text-vi-ink3">
+              <span className="relative inline-flex size-2">
+                <span className="absolute inline-flex size-full animate-ping rounded-full bg-vi-primary opacity-60" />
+                <span className="relative inline-flex size-2 rounded-full bg-vi-primary" />
+              </span>
+              {PROOF.checksToday} checks run in the last 24 hours
+            </p>
           </form>
         ) : (
           <div
@@ -187,6 +195,10 @@ export function Hero({ plate, setPlate, reason, setReason, onSubmit, onSample })
         <span className="inline-flex items-center gap-1.5">
           <IconShield size={13} stroke={2.4} className="shrink-0 text-vi-primary" /> Official DVLA + DVSA data
         </span>
+      </div>
+
+      <div {...rise(500)} className="relative z-[1] mt-4 flex animate-rise justify-center">
+        <RatingStrip />
       </div>
     </section>
   )

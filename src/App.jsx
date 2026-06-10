@@ -10,6 +10,8 @@ import { ReasonsRow } from './components/Reasons.jsx'
 import { PricingSection } from './components/Pricing.jsx'
 import { FinalCTA } from './components/FinalCTA.jsx'
 import { Footer } from './components/Footer.jsx'
+import { Journey } from './components/Journey.jsx'
+import { LiveActivityToast } from './components/SocialProof.jsx'
 
 const CONTENT_SHELL =
   'mx-auto my-6 max-w-[1160px] rounded-2xl bg-vi-content px-8 pt-9 pb-12 max-[700px]:m-3 max-[700px]:px-4 max-[700px]:pt-6 max-[700px]:pb-8'
@@ -24,9 +26,15 @@ export default function App() {
     window.scrollTo({ top: 0 })
   }
 
+  const [journeyReg, setJourneyReg] = useState('')
+
+  /* Entering a reg starts the mock buying journey:
+     scan → free report → checkout → success. */
   const onSubmit = (reg, why) => {
-    const suffix = why ? ' · reason: ' + why : ''
-    alert('Would open report for: ' + (reg || 'YH17 SRU') + suffix)
+    setJourneyReg(reg || 'YH17 SRU')
+    if (why) setReason(why)
+    setRoute('journey')
+    window.scrollTo({ top: 0 })
   }
 
   /* "View a sample full check" goes to the actual sample report
@@ -58,9 +66,14 @@ export default function App() {
   return (
     <div className="min-h-screen bg-vi-page">
       <Header onNav={nav} route={route} />
-      <StickyCTA plate={plate} setPlate={setPlate} onSubmit={onSubmit} onHome={() => nav('home')} />
+      {route !== 'journey' && (
+        <StickyCTA plate={plate} setPlate={setPlate} onSubmit={onSubmit} onHome={() => nav('home')} />
+      )}
+      {route === 'home' && <LiveActivityToast />}
 
-      {route === 'pricing' ? (
+      {route === 'journey' ? (
+        <Journey reg={journeyReg} reason={reason} onHome={() => nav('home')} />
+      ) : route === 'pricing' ? (
         <div className={CONTENT_SHELL}>
           <PricingSection onChoose={() => {}} />
           <section className="mt-10 pt-9 pb-2">
