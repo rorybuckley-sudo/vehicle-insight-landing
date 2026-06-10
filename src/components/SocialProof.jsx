@@ -38,6 +38,51 @@ export function RatingStrip({ className = '' }) {
   )
 }
 
+/* Blue-chip partner bar (authority + trust transfer).
+   Monochrome text wordmarks — swap for approved logo artwork
+   once partner brand sign-off is in place. */
+const PARTNERS = [
+  { name: 'The Telegraph', cls: 'font-display text-[17px] font-semibold tracking-[-0.01em]' },
+  { name: 'What Car?', cls: 'font-body text-[16px] font-black italic tracking-[-0.03em]' },
+  { name: 'halfords', cls: 'font-body text-[17px] font-black lowercase tracking-[-0.02em]' },
+  { name: 'SELECT Car Leasing', cls: 'font-body text-[13px] font-extrabold tracking-[0.02em] uppercase' },
+  { name: 'ASDA', cls: 'font-body text-[16px] font-black tracking-[0.1em]' },
+]
+
+export function PartnerBar({ compact = false }) {
+  return (
+    <div className={compact ? '' : 'flex flex-col items-center gap-2.5'} aria-label="As seen on and recommended by The Telegraph, What Car?, Halfords, Select Car Leasing and Asda">
+      <div
+        className={
+          'font-bold tracking-[0.18em] uppercase ' +
+          (compact ? 'mb-2 text-[10px] text-vi-ink3' : 'text-[10.5px] text-zinc-400')
+        }
+      >
+        As seen on &amp; recommended by
+      </div>
+      <div
+        className={
+          'flex flex-wrap items-baseline justify-center ' +
+          (compact ? 'gap-x-4 gap-y-1.5' : 'gap-x-8 gap-y-2 max-[700px]:gap-x-5')
+        }
+      >
+        {PARTNERS.map((p) => (
+          <span
+            key={p.name}
+            className={
+              p.cls +
+              ' whitespace-nowrap text-zinc-400 transition-colors duration-[160ms] ease-vi hover:text-vi-ink2 ' +
+              (compact ? 'scale-[0.82] origin-left' : '')
+            }
+          >
+            {p.name}
+          </span>
+        ))}
+      </div>
+    </div>
+  )
+}
+
 /* Rotating "someone just bought" toast (herd mentality).
    Shows ~6s, rests ~9s, cycles. Dismissible, landing page only. */
 const ACTIVITY = [

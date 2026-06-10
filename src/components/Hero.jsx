@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { HERO, CHECK_REASONS } from '../data.jsx'
 import { IconArrowRight, IconLock, IconClock, IconShield } from './Icons.jsx'
 import { Button, Nudge, PlateField } from './ui.jsx'
-import { RatingStrip, PROOF } from './SocialProof.jsx'
+import { RatingStrip, PartnerBar, PROOF } from './SocialProof.jsx'
 
 /* Entrance stagger: each hero child rises in sequence on load. */
 const rise = (delay) => ({ className: 'animate-rise', style: { animationDelay: `${delay}ms` } })
@@ -199,6 +199,10 @@ export function Hero({ plate, setPlate, reason, setReason, onSubmit, onSample })
 
       <div {...rise(500)} className="relative z-[1] mt-4 flex animate-rise justify-center">
         <RatingStrip />
+      </div>
+
+      <div {...rise(560)} className="relative z-[1] mt-7 animate-rise">
+        <PartnerBar />
       </div>
     </section>
   )

@@ -11,7 +11,7 @@ import {
   IconUsers,
 } from './Icons.jsx'
 import { Button, Nudge } from './ui.jsx'
-import { Stars, RatingStrip, useCountdown, TESTIMONIALS, PROOF } from './SocialProof.jsx'
+import { Stars, RatingStrip, PartnerBar, useCountdown, TESTIMONIALS, PROOF } from './SocialProof.jsx'
 
 /* ──────────────────────────────────────────────────────────────
    Mock buying journey (CRO prototype).
@@ -403,6 +403,9 @@ function CheckoutStep({ reg, onPay, onBack }) {
           </ul>
           <div className="mt-3 border-t border-zinc-100 pt-3">
             <RatingStrip />
+          </div>
+          <div className="mt-3 border-t border-zinc-100 pt-3">
+            <PartnerBar compact />
           </div>
         </div>
         {TESTIMONIALS.slice(1).map((t) => (
