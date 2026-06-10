@@ -1,6 +1,7 @@
 // Generate live-action ad video (people + native voiceover) via Google Veo.
 //
-// Usage:   node promo/generate-veo.mjs [buying|selling|owner]   (no arg = all three)
+// Usage:   node promo/generate-veo.mjs [buying|selling|owner] [segment#]
+//          (no args = all three ads; segment# re-rolls just that part, no stitch)
 // Needs:   GEMINI_API_KEY env var — Google AI Studio key on a billing-enabled
 //          project (Veo is paid-tier only). Optional: VEO_MODEL to override.
 //          ffmpeg on PATH (already installed) for stitching the two segments.
@@ -46,7 +47,7 @@ function segmentPrompts(storyboard) {
   }))
 }
 
-async function generateClip(promptObj, outFile) {
+async function generateClip(promptObj, outFile, negativePrompt) {
   const res = await fetch(`${API}/models/${MODEL}:predictLongRunning`, {
     method: 'POST',
     headers: HEADERS,
@@ -55,9 +56,10 @@ async function generateClip(promptObj, outFile) {
       parameters: {
         aspectRatio: '9:16',
         resolution: '1080p',
-        // Required to include people. May be regionally restricted —
-        // if the API rejects it, retry with 'allow_adult' removed.
-        personGeneration: 'allow_adult',
+        // personGeneration deliberately omitted: this model/region rejects
+        // explicit 'allow_adult' ("currently not supported") and its default
+        // already permits adults in text-to-video.
+        ...(negativePrompt ? { negativePrompt } : {}),
       },
     }),
   })
@@ -93,12 +95,21 @@ async function run(name) {
 
   console.log(`\n=== ${name} — model ${MODEL} ===`)
   const segs = segmentPrompts(storyboard)
+  const only = process.argv[3] ? Number(process.argv[3]) : null
   const parts = []
   for (let i = 0; i < segs.length; i++) {
     const part = path.join(outDir, `${name}-veo-part${i + 1}.mp4`)
+    if (only && only !== i + 1) {
+      parts.push(part)
+      continue
+    }
     console.log(`segment ${i + 1}/${segs.length} (${segs[i].scenes.map((s) => s.time).join(', ')})`)
-    await generateClip(segs[i], part)
+    await generateClip(segs[i], part, storyboard.negative_prompt)
     parts.push(part)
+  }
+  if (only) {
+    console.log(`DONE (segment ${only} only — not stitched)`)
+    return
   }
 
   // Stitch with re-encode so audio stays in sync across the cut.

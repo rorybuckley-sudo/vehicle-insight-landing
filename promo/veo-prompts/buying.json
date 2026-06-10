@@ -11,18 +11,19 @@
       "description": "Middle-aged man, friendly but slightly evasive, stands by the car"
     }
   ],
+  "negative_prompt": "on-screen text, captions, subtitles, typography, words, letters, numbers on screens, app UI mockups, watermarks, logos",
   "scenes": [
     {
       "time": "0-3s",
       "camera": "Slow push-in, shallow depth of field, eye level on the car",
-      "action": "Buyer circles the car. Seller smiles. On-screen caption: \"That 'clean' car you're about to buy…\"",
-      "audio": "Low tense ambient pad, distant street sounds (volume: low)"
+      "action": "Buyer circles the car appraisingly. Seller smiles and leans on the bonnet. No text anywhere in frame.",
+      "audio": "Low tense ambient pad, distant street sounds (volume: low). VO, female, warm and dry: \"That clean car you're about to buy… isn't always clean.\""
     },
     {
       "time": "3-7s",
-      "camera": "Over-the-shoulder close-up of the buyer's phone screen",
-      "action": "She types the registration YH17 SRU into the Vehicle Insight plate field. A progress bar sweeps: 'Checking DVLA · DVSA · finance registers…'",
-      "audio": "Soft UI ticks, rising synth note (volume: medium)"
+      "camera": "Over-the-shoulder close-up of the buyer holding her phone, screen angled away so its contents are not visible, focus on her face turning sceptical",
+      "action": "She glances from the phone to the car, then to the seller, eyebrow raised. The seller's smile falters. No readable screens or text in frame.",
+      "audio": "Soft UI ticks, rising synth note (volume: medium). VO continues: \"Thirty seconds with Vehicle Insight told her what the seller wouldn't.\""
     },
     {
       "time": "7-11s",
