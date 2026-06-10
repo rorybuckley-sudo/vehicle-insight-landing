@@ -3,10 +3,17 @@ import { useId } from 'react'
 // Vehicle Insight lockup — three nested gradient swooshes + serif wordmark.
 // `wordmarkColor` lets dark surfaces (footer) keep the wordmark legible —
 // the source design shipped it #3d3d3e on a #3d3d3e footer, invisible.
-export function LogoVI({ height = 44, wordmarkColor = '#3d3d3e' }) {
+// `animate` plays the one-time swoosh cascade on mount (header only).
+// Wrap the logo in an element with class `vi-brand` to get the hover fan.
+export function LogoVI({ height = 44, wordmarkColor = '#3d3d3e', animate = false }) {
   const id = useId().replace(/:/g, '_')
   return (
-    <svg viewBox="0 0 540 220" style={{ height, display: 'block', width: 'auto' }} aria-hidden="true">
+    <svg
+      viewBox="0 0 540 220"
+      style={{ height, display: 'block', width: 'auto' }}
+      className={'vi-logo' + (animate ? ' vi-logo--animate' : '')}
+      aria-hidden="true"
+    >
       <defs>
         <linearGradient id={`r-${id}`} x1="0" y1="0" x2="1" y2="1">
           <stop offset="0%" stopColor="#9c1d23" />
@@ -23,26 +30,33 @@ export function LogoVI({ height = 44, wordmarkColor = '#3d3d3e' }) {
       </defs>
       <g>
         <path
+          className="vi-swoosh vi-swoosh--r"
           fill={`url(#r-${id})`}
           d="M170,38h-95a30,30 0 0 0 -30,30v76a30,30 0 0 0 30,30h95l20,32V68a30,30 0 0 0 -30,-30z"
         />
         <path
+          className="vi-swoosh vi-swoosh--o"
           fill={`url(#o-${id})`}
           d="M150,18h-95a30,30 0 0 0 -30,30v76a30,30 0 0 0 30,30h95l20,32V48a30,30 0 0 0 -30,-30z"
         />
-        <path
-          fill={`url(#t-${id})`}
-          d="M130,38h-95a30,30 0 0 0 -30,30v76a30,30 0 0 0 30,30h95l20,32V68a30,30 0 0 0 -30,-30z"
-        />
-        <path fill="#fff" d="M55,80 L80,80 L92,128 L104,80 L129,80 L108,150 L76,150 Z" />
-        <rect fill="#fff" x="138" y="80" width="20" height="70" rx="3" />
+        {/* The "VI" letters ride on the teal swoosh so the fan keeps them aligned */}
+        <g className="vi-swoosh vi-swoosh--t">
+          <path
+            fill={`url(#t-${id})`}
+            d="M130,38h-95a30,30 0 0 0 -30,30v76a30,30 0 0 0 30,30h95l20,32V68a30,30 0 0 0 -30,-30z"
+          />
+          <path fill="#fff" d="M55,80 L80,80 L92,128 L104,80 L129,80 L108,150 L76,150 Z" />
+          <rect fill="#fff" x="138" y="80" width="20" height="70" rx="3" />
+        </g>
       </g>
-      <text x="210" y="100" fontFamily="Fraunces, Georgia, serif" fontWeight="800" fontSize="48" letterSpacing="-0.5" fill={wordmarkColor}>
-        VEHICLE
-      </text>
-      <text x="210" y="148" fontFamily="Fraunces, Georgia, serif" fontWeight="800" fontSize="48" letterSpacing="-0.5" fill={wordmarkColor}>
-        INSIGHT
-      </text>
+      <g className="vi-wordmark">
+        <text x="210" y="100" fontFamily="Fraunces, Georgia, serif" fontWeight="800" fontSize="48" letterSpacing="-0.5" fill={wordmarkColor}>
+          VEHICLE
+        </text>
+        <text x="210" y="148" fontFamily="Fraunces, Georgia, serif" fontWeight="800" fontSize="48" letterSpacing="-0.5" fill={wordmarkColor}>
+          INSIGHT
+        </text>
+      </g>
     </svg>
   )
 }

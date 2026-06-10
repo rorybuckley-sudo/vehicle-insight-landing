@@ -9,11 +9,11 @@ export function Header({ onNav, route = 'home', signedIn = true }) {
     <header className="sticky top-0 z-50 border-b border-vi-border bg-white">
       <div className="mx-auto grid max-w-[1160px] grid-cols-[auto_1fr_auto] items-center gap-6 px-6 py-[14px] max-[700px]:grid-cols-[auto_auto] max-[700px]:justify-between max-[700px]:gap-3">
         <button
-          className="flex cursor-pointer items-center gap-3 border-0 bg-transparent p-0"
+          className="vi-brand flex cursor-pointer items-center gap-3 border-0 bg-transparent p-0"
           onClick={() => onNav('home')}
           aria-label="Vehicle Insight home"
         >
-          <LogoVI height={44} />
+          <LogoVI height={44} animate />
         </button>
         <div className="flex flex-col items-center gap-0.5 justify-self-center max-[1000px]:hidden">
           <span className="text-[10px] text-vi-ink3 italic">in association with</span>

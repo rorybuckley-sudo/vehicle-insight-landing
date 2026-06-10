@@ -25,7 +25,7 @@ export function StickyCTA({ plate, setPlate, onSubmit, onHome }) {
     >
       <div className="mx-auto flex max-w-[1160px] items-center gap-5 px-6 py-2.5">
         <button
-          className="shrink-0 cursor-pointer border-0 bg-transparent p-0 max-[700px]:hidden"
+          className="vi-brand shrink-0 cursor-pointer border-0 bg-transparent p-0 max-[700px]:hidden"
           onClick={onHome}
           aria-label="Vehicle Insight home"
           tabIndex={show ? 0 : -1}

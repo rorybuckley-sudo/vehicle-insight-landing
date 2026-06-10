@@ -101,6 +101,63 @@
 @utility animate-swap {
   animation: vi-swap 0.32s var(--ease-vi) both;
 }
+/* ── Logo motion ─────────────────────────────────────────────
+   One-time cascade on load (header logo only), and a gentle
+   parallax fan when a `.vi-brand` wrapper is hovered. The "VI"
+   letters are grouped with the teal swoosh so they stay put. */
+@keyframes vi-swoosh-in {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+@keyframes vi-wordmark-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.vi-logo .vi-swoosh {
+  transition: transform 0.32s var(--ease-vi);
+  will-change: transform;
+}
+.vi-logo--animate .vi-swoosh--r {
+  animation: vi-swoosh-in 0.55s var(--ease-vi) 0ms both;
+}
+.vi-logo--animate .vi-swoosh--o {
+  animation: vi-swoosh-in 0.55s var(--ease-vi) 100ms both;
+}
+.vi-logo--animate .vi-swoosh--t {
+  animation: vi-swoosh-in 0.55s var(--ease-vi) 200ms both;
+}
+.vi-logo--animate .vi-wordmark {
+  animation: vi-wordmark-in 0.5s var(--ease-vi) 320ms both;
+}
+
+/* Hover fan — the three layers spread a few pixels apart, like the
+   stack breathing open; transition above eases them back together. */
+.vi-brand:hover .vi-swoosh--r,
+.vi-brand:focus-visible .vi-swoosh--r {
+  transform: translateX(14px);
+}
+.vi-brand:hover .vi-swoosh--o,
+.vi-brand:focus-visible .vi-swoosh--o {
+  transform: translateX(0);
+}
+.vi-brand:hover .vi-swoosh--t,
+.vi-brand:focus-visible .vi-swoosh--t {
+  transform: translateX(-14px);
+}
+
 @keyframes vi-pulse {
   0% {
     box-shadow:
