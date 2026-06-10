@@ -43,7 +43,7 @@ export function StickyCTA({ plate, setPlate, onSubmit, onHome }) {
           }}
         >
           <PlateField value={plate} onChange={setPlate} placeholder="TYPE REG..." small tabIndex={show ? 0 : -1} />
-          <Button type="submit" tabIndex={show ? 0 : -1}>
+          <Button type="submit" tabIndex={show ? 0 : -1} className={show ? 'animate-cta-bounce' : ''}>
             Get report
             <Nudge>
               <IconArrowRight size={15} stroke={2.4} />

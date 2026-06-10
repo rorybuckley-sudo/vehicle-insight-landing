@@ -91,7 +91,7 @@ export function Hero({ plate, setPlate, reason, setReason, onSubmit, onSample })
                 </button>
               </div>
             )}
-            <Button type="submit" size="lg" block>
+            <Button type="submit" size="lg" block className="animate-cta-bounce-late">
               Get free basic report
               <Nudge>
                 <IconArrowRight size={16} stroke={2.4} />
